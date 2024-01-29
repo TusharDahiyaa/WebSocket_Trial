@@ -5,7 +5,11 @@ const { Server } = require("socket.io");
 const cors = require("cors");
 const PORT = process.env.PORT || 8080;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://websocket-single-chat.onrender.com",
+  })
+);
 
 const server = http.createServer(app);
 const io = new Server(server, {
