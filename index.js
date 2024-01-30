@@ -25,6 +25,13 @@ io.on("connection", (socket) => {
   });
 });
 
+io.engine.on("connection_error", (err) => {
+  console.log(err.req);
+  console.log(err.code);
+  console.log(err.message);
+  console.log(err.context);
+});
+
 server.listen(PORT, () => {
   console.log(`Listening on ${PORT}`);
 });
