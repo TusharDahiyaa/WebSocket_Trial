@@ -9,7 +9,6 @@ const path = require("path");
 app.use(
   cors({
     origin: "https://websocket-single-chat.onrender.com/",
-    credentials: true,
   })
 );
 app.use(express.json());
@@ -18,7 +17,7 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: "https://websocket-single-chat.onrender.com/",
-    credentials: true,
+    methods: ["GET", "POST"],
   },
 });
 
