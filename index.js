@@ -5,25 +5,18 @@ const { Server } = require("socket.io");
 const cors = require("cors");
 const PORT = process.env.PORT || 8080;
 
-app.use(
-  cors({
-    origin: "https://websocket-single-chat.onrender.com",
-    methods: ["GET", "POST"],
-  })
-);
+app.use(cors());
 
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: {
-    origin: "https://websocket-single-chat.onrender.com",
-  },
+  cors: {},
 });
 
 io.on("connection", (socket) => {
   console.log(`User ${socket.id} connected.`);
 
   socket.on("sendMessage", (data) => {
-    socket.broadcast.emit("receivedMessage", data);
+    io.emit("receivedMessage", data);
   });
 
   //   When a client disconnects, perform this
