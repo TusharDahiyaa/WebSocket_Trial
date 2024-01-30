@@ -4,12 +4,22 @@ const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 const PORT = process.env.PORT || 8080;
+const path = require("path");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://websocket-single-chat.onrender.com/",
+    credentials: true,
+  })
+);
+app.use(express.json());
 
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: {},
+  cors: {
+    origin: "https://websocket-single-chat.onrender.com/",
+    credentials: true,
+  },
 });
 
 io.on("connection", (socket) => {
@@ -30,6 +40,10 @@ io.engine.on("connection_error", (err) => {
   console.log(err.code);
   console.log(err.message);
   console.log(err.context);
+});
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 server.listen(PORT, () => {
