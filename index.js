@@ -32,14 +32,6 @@ io.on("connection", (socket) => {
     console.log(`User ${socket.id} has left the chat`);
   });
 });
-
-io.engine.on("connection_error", (err) => {
-  console.log(err.req);
-  console.log(err.code);
-  console.log(err.message);
-  console.log(err.context);
-});
-
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
