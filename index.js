@@ -6,18 +6,12 @@ const cors = require("cors");
 const PORT = process.env.PORT || 8080;
 const path = require("path");
 
-app.use(
-  cors({
-    origin: "https://websocket-single-chat.onrender.com/",
-  })
-);
+app.use(cors());
 app.use(express.json());
 
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: {
-    origin: "https://websocket-single-chat.onrender.com/",
-  },
+  cors: {},
 });
 
 io.on("connection", (socket) => {
